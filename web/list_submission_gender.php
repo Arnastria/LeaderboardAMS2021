@@ -1,11 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "anamedsos";
+$host = 's3lkt7lynu0uthj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+$username = 'uhtbugxx9ty6dufh';
+$password = 'wtqo9g6jixlfm7ov';
+$dbname = 'clgr9wl4akcxw07o';
 
 // Connect to the database
-$dbLink = new mysqli($servername, $username, $password, $dbname);
+$dbLink = new mysqli($host, $username, $password, $dbname);
 if(mysqli_connect_errno()) {
     die("MySQL connection failed: ". mysqli_connect_error());
 }

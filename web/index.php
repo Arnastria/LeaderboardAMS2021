@@ -1,12 +1,12 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "anamedsos";
+$host = 's3lkt7lynu0uthj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+$username = 'uhtbugxx9ty6dufh';
+$password = 'wtqo9g6jixlfm7ov';
+$dbname = 'clgr9wl4akcxw07o';
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($host, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {

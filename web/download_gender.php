@@ -5,10 +5,10 @@ if ( isset($_GET['id'])) {
 	$id = $_GET['id'];
 	$waktu = $_GET['updated'];
 	
-	$host = 'localhost';
-	$username = 'root';
-	$password = '';
-	$dbname = 'anamedsos';
+	$host = 's3lkt7lynu0uthj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+	$username = 'uhtbugxx9ty6dufh';
+	$password = 'wtqo9g6jixlfm7ov';
+	$dbname = 'clgr9wl4akcxw07o';
 
 	$connection =  mysqli_connect($host, $username, $password, $dbname) or die('Database Connection Failed');
 	mysqli_set_charset($connection,'utf-8');

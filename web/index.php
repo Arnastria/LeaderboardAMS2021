@@ -15,14 +15,14 @@ if ($conn->connect_error) {
 $sql = "select * from person_result order by `tester accuracy` desc";
 $result_person = $conn->query($sql);
 
-$sql = "select * from gender_result order by `tester accuracy` desc";
-$result_gender = $conn->query($sql);
+// $sql = "select * from gender_result order by `tester accuracy` desc";
+// $result_gender = $conn->query($sql);
 
-$sql = "select * from ethnic_group_result order by `tester accuracy` desc";
-$result_ethnic_group = $conn->query($sql);
+// $sql = "select * from ethnic_group_result order by `tester accuracy` desc";
+// $result_ethnic_group = $conn->query($sql);
 
-$sql = "select * from marital_status_result order by `tester accuracy` desc";
-$result_marital_status = $conn->query($sql);
+// $sql = "select * from marital_status_result order by `tester accuracy` desc";
+// $result_marital_status = $conn->query($sql);
 ?>
 
 <center>
@@ -77,7 +77,7 @@ Submit your test result here: <br>
 	</form>
 </table>
 <hr>
-<h4>Gender Prediction</h4>
+<!-- <h4>Gender Prediction</h4>
 <table width="1000">
 	<tr>
 		<td><strong>Ranking</strong></td>
@@ -89,17 +89,17 @@ Submit your test result here: <br>
 	</tr>
 <?php
 	// output data of each row
-	$i = 1;
-	while($row = $result_gender->fetch_assoc()) {
-		echo "<tr bgcolor=\"pink\">";
-		echo "<td>".$i."</td>";
-		echo "<td>".$row["Groupname"]."</td>";
-		echo "<td>".($row["Tester Accuracy"])."</td>";
-		echo "<td>".($row["Tester Precision"])."</td>";
-		echo "<td>".($row["Tester Recall"])."</td>";
-		echo "<td>".($row["Tester F1-Score"])."</td>";
-		echo "</tr>";
-		$i++;
+	// $i = 1;
+	// while($row = $result_gender->fetch_assoc()) {
+	// 	echo "<tr bgcolor=\"pink\">";
+	// 	echo "<td>".$i."</td>";
+	// 	echo "<td>".$row["Groupname"]."</td>";
+	// 	echo "<td>".($row["Tester Accuracy"])."</td>";
+	// 	echo "<td>".($row["Tester Precision"])."</td>";
+	// 	echo "<td>".($row["Tester Recall"])."</td>";
+	// 	echo "<td>".($row["Tester F1-Score"])."</td>";
+	// 	echo "</tr>";
+	// 	$i++;
 	}
 ?>
 </table>
@@ -136,17 +136,17 @@ Submit your test result here: <br>
 	</tr>
 <?php
 	// output data of each row
-	$i = 1;
-	while($row = $result_ethnic_group->fetch_assoc()) {
-		echo "<tr bgcolor=\"lightgreen\">";
-		echo "<td>".$i."</td>";
-		echo "<td>".$row["Groupname"]."</td>";
-		echo "<td>".($row["Tester Accuracy"])."</td>";
-		echo "<td>".($row["Tester Precision"])."</td>";
-		echo "<td>".($row["Tester Recall"])."</td>";
-		echo "<td>".($row["Tester F1-Score"])."</td>";
-		echo "</tr>";
-		$i++;
+	// $i = 1;
+	// while($row = $result_ethnic_group->fetch_assoc()) {
+	// 	echo "<tr bgcolor=\"lightgreen\">";
+	// 	echo "<td>".$i."</td>";
+	// 	echo "<td>".$row["Groupname"]."</td>";
+	// 	echo "<td>".($row["Tester Accuracy"])."</td>";
+	// 	echo "<td>".($row["Tester Precision"])."</td>";
+	// 	echo "<td>".($row["Tester Recall"])."</td>";
+	// 	echo "<td>".($row["Tester F1-Score"])."</td>";
+	// 	echo "</tr>";
+	// 	$i++;
 	}
 ?>
 </table>
@@ -183,17 +183,17 @@ Submit your test result here: <br>
 	</tr>
 <?php
 	// output data of each row
-	$i = 1;
-	while($row = $result_marital_status->fetch_assoc()) {
-		echo "<tr bgcolor=\"lightblue\">";
-		echo "<td>".$i."</td>";
-		echo "<td>".$row["Groupname"]."</td>";
-		echo "<td>".($row["Tester Accuracy"])."</td>";
-		echo "<td>".($row["Tester Precision"])."</td>";
-		echo "<td>".($row["Tester Recall"])."</td>";
-		echo "<td>".($row["Tester F1-Score"])."</td>";
-		echo "</tr>";
-		$i++;
+	// $i = 1;
+	// while($row = $result_marital_status->fetch_assoc()) {
+	// 	echo "<tr bgcolor=\"lightblue\">";
+	// 	echo "<td>".$i."</td>";
+	// 	echo "<td>".$row["Groupname"]."</td>";
+	// 	echo "<td>".($row["Tester Accuracy"])."</td>";
+	// 	echo "<td>".($row["Tester Precision"])."</td>";
+	// 	echo "<td>".($row["Tester Recall"])."</td>";
+	// 	echo "<td>".($row["Tester F1-Score"])."</td>";
+	// 	echo "</tr>";
+	// 	$i++;
 	}
 ?>
 </table>
@@ -217,7 +217,7 @@ Submit your test result here: <br>
 		</tr>
 	</form>
 </table>
-<hr>
+<hr> -->
 </center>
 <?php
 

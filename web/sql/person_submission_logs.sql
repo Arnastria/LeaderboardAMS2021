@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `origin_submission_logs`
+-- Table structure for table `person_submission_logs`
 --
 
-CREATE TABLE `origin_submission_logs` (
+CREATE TABLE `person_submission_logs` (
   `UploadKey` varchar(11) DEFAULT NULL,
   `GroupName` varchar(20) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,

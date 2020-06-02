@@ -11,7 +11,7 @@ if(mysqli_connect_errno()) {
 }
  
 // Query for a list of all existing files
-$sql = 'SELECT GroupName, UploadKey, filename, mime, size, data, updated, TesterAccuracy, TesterPrecision, TesterRecall, TesterF1Score FROM origin_submission_logs ORDER BY GroupName, updated DESC';
+$sql = 'SELECT GroupName, UploadKey, filename, mime, size, data, updated, TesterAccuracy, TesterPrecision, TesterRecall, TesterF1Score FROM person_submission_logs ORDER BY GroupName, updated DESC';
 $result = $dbLink->query($sql);
  
 // Check if it was successfull
@@ -51,7 +51,7 @@ if($result) {
 					<td>{$row['TesterRecall']}</td>
 					<td>{$row['TesterF1Score']}</td>
 					<td>
-					<a href='download_origin.php?id=$groupName&updated=$waktu'>
+					<a href='download_person.php?id=$groupName&updated=$waktu'>
 					Download
 					</a>
 					</td>

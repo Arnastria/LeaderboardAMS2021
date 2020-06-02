@@ -13,7 +13,7 @@ if ( isset($_GET['id'])) {
 	$connection =  mysqli_connect($host, $username, $password, $dbname) or die('Database Connection Failed');
 	mysqli_set_charset($connection,'utf-8');
 
-	$query = "SELECT * FROM origin_submission_logs WHERE GroupName = '$id' AND updated='$waktu'";
+	$query = "SELECT * FROM person_submission_logs WHERE GroupName = '$id' AND updated='$waktu'";
 	$result = mysqli_query($connection,$query) 
 		   or die('Error, query failed');
 	list($UploadKey, $GroupName, $filename, $mime, $size, $updated, $data, $TesterAccuracy, $TesterPrecision, $TesterRecall, $TesterF1Score ) = mysqli_fetch_array($result);

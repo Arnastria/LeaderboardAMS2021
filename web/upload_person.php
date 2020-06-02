@@ -3,7 +3,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 	if ( isset($_FILES["file"])) {
 		//if there was an error uploading the file
 		if ($_FILES["file"]["error"] > 0) {
-			echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
+			echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
 		} else {
 			// get uploadKey
 			$uploadKey = $_POST["uploadkey"];
@@ -23,7 +23,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			}
 			
 			//get groupname for giving filename
-			$getdata = "SELECT GroupName from origin_result where UploadKey = $uploadKey";
+			$getdata = "SELECT GroupName from person_result where UploadKey = $uploadKey";
 			$result_get = $conn->query($getdata);
 			$namagrup = '';
 			if ($result_get) {
@@ -67,7 +67,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			
 			#echo "count y_pred " . count($y_pred) . "<br>";
 			//load gold standard data
-			$fp = fopen('temp_x2z/origin_gold_standar_tester.csv', 'r');
+			$fp = fopen('temp_x2z/person_gold_standar_tester.csv', 'r');
 			$y_gold = array();
 			$i = 0;
 			while ( ($line = fgetcsv($fp,1000,",")) !== false) {
@@ -174,7 +174,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 				$f1_score = 0;
 			}
 			
-			$sql = "UPDATE origin_result SET `tester accuracy` = $accuracy, `tester precision` = $precision, `tester recall` = $recall, `tester f1-score` = $f1_score WHERE Uploadkey='$uploadKey'";
+			$sql = "UPDATE person_result SET `tester accuracy` = $accuracy, `tester precision` = $precision, `tester recall` = $recall, `tester f1-score` = $f1_score WHERE Uploadkey='$uploadKey'";
 
 			if ($conn->query($sql) === TRUE) {
 				//echo "Record updated successfully";
@@ -202,7 +202,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			
 				// update table submission untuk simpan filename yang disubmit oleh grup
 				$sekarang = date("Y-m-d H:i:s");
-				$sql = "INSERT INTO origin_submission_logs(UploadKey, GroupName, filename, mime, size, updated, data, TesterAccuracy, TesterPrecision, TesterRecall, TesterF1Score) VALUES 
+				$sql = "INSERT INTO person_submission_logs(UploadKey, GroupName, filename, mime, size, updated, data, TesterAccuracy, TesterPrecision, TesterRecall, TesterF1Score) VALUES 
 						('$uploadKey', '$namagrup', '$name', '$mime', '$size', '$sekarang','$string_input', '$accuracy', '$precision', '$recall', '$f1_score')";
 
 				if ($conn->query($sql) === TRUE) {

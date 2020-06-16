@@ -1,4 +1,5 @@
 <?php
+
 $host = 's3lkt7lynu0uthj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
 $username = 'uhtbugxx9ty6dufh';
 $password = 'wtqo9g6jixlfm7ov';
@@ -11,7 +12,9 @@ if(mysqli_connect_errno()) {
 }
  
 // Query for a list of all existing files
-$sql = 'SELECT GroupName, UploadKey, filename, mime, size, data, updated, TesterAccuracy, TesterPrecision, TesterRecall, TesterF1Score FROM gender_submission_logs ORDER BY GroupName, updated DESC';
+$type = $_GET['type'];
+$table = $type . '_submission_logs';
+$sql = "SELECT GroupName, UploadKey, filename, mime, size, data, updated, Accuracy, Precision_C, Recall, F1Score FROM $table ORDER BY GroupName, updated DESC";
 $result = $dbLink->query($sql);
  
 // Check if it was successfull
@@ -46,12 +49,12 @@ if($result) {
                     <td>{$row['mime']}</td>
                     <td>{$row['size']}</td>
                     <td>{$row['updated']}</td>
-					<td>{$row['TesterAccuracy']}</td>
-					<td>{$row['TesterPrecision']}</td>
-					<td>{$row['TesterRecall']}</td>
-					<td>{$row['TesterF1Score']}</td>
+					<td>{$row['Accuracy']}</td>
+					<td>{$row['Precision_C']}</td>
+					<td>{$row['Recall']}</td>
+					<td>{$row['F1Score']}</td>
 					<td>
-					<a href='download_gender.php?id=$groupName&updated=$waktu'>
+					<a href='download.php?type=$type&id=$groupName&updated=$waktu'>
 					Download
 					</a>
 					</td>
@@ -74,4 +77,5 @@ else
  
 // Close the mysql connection
 $dbLink->close();
+
 ?>

@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marital_status_result`
+-- Table structure for table `origin_9_result`
 --
 
-CREATE TABLE `marital_status_result` (
+CREATE TABLE `origin_9_result` (
   `ID` int(5) DEFAULT NULL,
   `Uploadkey` varchar(11) DEFAULT NULL,
   `Groupname` varchar(20) DEFAULT NULL,
@@ -43,10 +43,10 @@ CREATE TABLE `marital_status_result` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `marital_status_result`
+-- Dumping data for table `origin_9_result`
 --
 
-INSERT INTO `marital_status_result` (`ID`, `Uploadkey`, `Groupname`, `Tester Accuracy`, `Tester Precision`, `Tester Recall`, `Tester F1-Score`, `Complete Set Accuracy`, `Complete Set Precision`, `Complete Set Recall`, `Complete Set F1-Score`) VALUES
+INSERT INTO `origin_9_result` (`ID`, `Uploadkey`, `Groupname`, `Tester Accuracy`, `Tester Precision`, `Tester Recall`, `Tester F1-Score`, `Complete Set Accuracy`, `Complete Set Precision`, `Complete Set Recall`, `Complete Set F1-Score`) VALUES
 (1, '70388', 'sabeb', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
 (2, '18964', 'NaiveBayes', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
 (3, '81883', 'CrazyHungryAsians', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),

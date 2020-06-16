@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `person_result`
+-- Table structure for table `origin_2_result`
 --
 
-CREATE TABLE `person_result` (
+CREATE TABLE `origin_2_result` (
   `ID` int(5) DEFAULT NULL,
   `Uploadkey` varchar(11) DEFAULT NULL,
   `Groupname` varchar(20) DEFAULT NULL,
@@ -43,22 +43,22 @@ CREATE TABLE `person_result` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `person_result`
+-- Dumping data for table `origin_2_result`
 --
 
-INSERT INTO `person_result` (`ID`, `Uploadkey`, `Groupname`, `Tester Accuracy`, `Tester Precision`, `Tester Recall`, `Tester F1-Score`, `Complete Set Accuracy`, `Complete Set Precision`, `Complete Set Recall`, `Complete Set F1-Score`) VALUES
-(1, '70388', 'sabeb', 50.00, 50.00, 100.00, 66.67, 0.00, 0.00, 0.00, 0.00),
-(2, '18964', 'NaiveBayes', 100.00, 100.00, 100.00, 100.00, 0.00, 0.00, 0.00, 0.00),
-(3, '81883', 'CrazyHungryAsians', 100.00, 100.00, 100.00, 100.00, 0.00, 0.00, 0.00, 0.00),
-(4, '26395', 'Ikan Lele', 100.00, 100.00, 100.00, 100.00, 0.00, 0.00, 0.00, 0.00),
-(5, '98805', 'Pengen Lulus', 50.00, 50.00, 40.00, 44.44, 0.00, 0.00, 0.00, 0.00),
-(6, '76442', 'Bosan di Rumah', 10.00, 50.00, 100.00, 66.67, 0.00, 0.00, 0.00, 0.00),
-(7, '39099', 'Bebas', 100.00, 100.00, 100.00, 100.00, 0.00, 0.00, 0.00, 0.00),
-(8, '24963', 'terserah~', 100.00, 100.00, 100.00, 100.00, 0.00, 0.00, 0.00, 0.00),
+INSERT INTO `origin_2_result` (`ID`, `Uploadkey`, `Groupname`, `Tester Accuracy`, `Tester Precision`, `Tester Recall`, `Tester F1-Score`, `Complete Set Accuracy`, `Complete Set Precision`, `Complete Set Recall`, `Complete Set F1-Score`) VALUES
+(1, '70388', 'sabeb', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(2, '18964', 'NaiveBayes', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(3, '81883', 'CrazyHungryAsians', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(4, '26395', 'Ikan Lele', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(5, '98805', 'Pengen Lulus', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(6, '76442', 'Bosan di Rumah', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(7, '39099', 'Bebas', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(8, '24963', 'terserah~', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
 (9, '98268', 'Renae Alcock', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
-(10, '76126', 'Anamedsos 2020', 100.00, 100.00, 100.00, 100.00, 0.00, 0.00, 0.00, 0.00),
-(11, '24671', 'Isomer', 100.00, 100.00, 100.00, 100.00, 100.00, 0.00, 0.00, 0.00),
-(12, '54891', 'Tester', 100.00, 100.00, 100.00, 100.00, 0.00, 0.00, 0.00, 0.00);
+(10, '76126', 'AN', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(11, '24671', 'Isomer', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(12, '54891', 'Tester', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

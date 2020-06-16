@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marital_status_submission_logs`
+-- Table structure for table `origin_2_submission_logs`
 --
 
-CREATE TABLE `marital_status_submission_logs` (
+CREATE TABLE `origin_2_submission_logs` (
   `UploadKey` varchar(11) DEFAULT NULL,
   `GroupName` varchar(20) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
@@ -36,10 +36,10 @@ CREATE TABLE `marital_status_submission_logs` (
   `size` bigint(20) UNSIGNED DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   `data` longblob NOT NULL,
-  `TesterAccuracy` double(5,2) NOT NULL,
-  `TesterPrecision` double(5,2) NOT NULL,
-  `TesterRecall` double(5,2) NOT NULL,
-  `TesterF1Score` double(5,2) NOT NULL
+  `Accuracy` double(5,2) NOT NULL,
+  `Precision_C` double(5,2) NOT NULL,
+  `Recall` double(5,2) NOT NULL,
+  `F1Score` double(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 COMMIT;
 

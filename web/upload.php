@@ -7,6 +7,9 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 		} else {
 			// get uploadKey
 			$uploadKey = $_POST["uploadkey"];
+
+			// upload type
+			$type = $_GET['type'];
 			
 			// db definition
 			$host = 's3lkt7lynu0uthj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
@@ -23,7 +26,8 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			}
 			
 			//get groupname for giving filename
-			$getdata = "SELECT GroupName from gender_result where UploadKey = $uploadKey";
+			$table = $type . '_result';
+			$getdata = "SELECT GroupName from $table where UploadKey = $uploadKey";
 			$result_get = $conn->query($getdata);
 			$namagrup = '';
 			if ($result_get) {
@@ -54,7 +58,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			$i = 0;
 			
 			$content = []; //variable content to store the value of uploaded docs
-			while ( ($read_line = fgetcsv($fp,1000,",")) !== false) {
+			while (($read_line = fgetcsv($fp,1000,",")) != false) {
 				$id_pred[$i] = $read_line[0];
 				$y_pred[$i] = $read_line[1];	
 				$gabungan[$i] = $id_pred[$i] . "," . $y_pred[$i];
@@ -66,101 +70,89 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			fclose($fp);
 			
 			//load gold standard data
-			$fp = fopen('temp_x2z/gender_gold_standar_tester.csv', 'r');
+			$file_gold = 'temp_x2z/' . $type . '_gold_standar.csv';
+			$fp = fopen($file_gold, 'r');
 			$y_gold = array();
 			$i = 0;
-			while ( ($line = fgetcsv($fp,1000,",")) !== false) {
+			$classes = array();
+			while (($line = fgetcsv($fp,1000,",")) != false) {
 				$id_gold[$i] = $line[0];
-				$y_gold[$i] = $line[1];	
+				$y_gold[$i] = $line[1];
+				if (!in_array($line[1], $classes) and $line[1] != '-') {
+					array_push($classes, $line[1]);
+				}	
 				$i++;
 			}
-			fclose($fp);	
+			fclose($fp);
 
-			//compute the metrices
-			$num_true = 0;
-			$tp = 0;
-			$tn = 0;
-			$fp = 0;
-			$fn = 0;
-			$i = 0;
-			
-			while ( ($i < count($y_gold)) and ($i < count($y_pred))) {
-				
-				#echo "<br> asli ke - " .$i . "---" . $y_gold[$i]. "--" . $y_pred[$i] ." num true : " ;
-				if (($y_gold[$i] == $y_pred[$i]) and (($y_gold[$i]) !== '-')) {
-					// calculate TP 
-					if ($y_gold[$i] == 1) {
-						$tp++;
-					}
-					else {
-						$tn++;
-					}
-					$num_true++;
+			$con_matrix = array();
+			for ($i = 0; $i < count($classes); $i++) {
+				$con_matrix[$i] = array();
+				for ($j = 0; $j < count($classes); $j++) {
+					$con_matrix[$i][$j] = 0;
 				}
-				elseif (($y_gold[$i] != $y_pred[$i]) and (($y_gold[$i]) !== '-')) {
-					//calculate FP
-					if ($y_gold[$i] == 0) {
-						$fp++;
-					}
-					else {
-						$fn++;
-					}
+			}
+
+			// modified
+			$i = 0;
+			while (($i < count($y_gold)) and ($i < count($y_pred))) {
+				if (($y_gold[$i]) != '-') {
+					 $con_matrix[array_search($y_gold[$i], $classes)][array_search($y_pred[$i], $classes)] += 1;
 				}
 				$i++;
-				
 			}
-			
-			#jumlah y_gold yang tidak null
 			
 			$counts = array_count_values($y_gold);
 			$counts_sum = array_sum($counts);
-			// $empty_gold = $counts['-'];
-			$empty_gold = 0;
+			$empty_gold = $counts['-'];
+			// $empty_gold = 0;
+			// jumlah y_gold yang tidak null
 			$count_y_gold = $counts_sum - $empty_gold;
-			$num_false = $count_y_gold - $num_true;
-			
-			// echo " Total Kosong ". $empty_gold;
-			// echo " Total Gold Standar " . $count_y_gold;
-	
+
+			$num_true = 0;
+			$fp = 0;
+			$fn = 0;
 			echo "<br>";
 			echo "Confusion Matrix:<br>";
-			echo "<table width=\"600\">";
+			echo "<table width=\"1000\">";
 			echo "<tr bgcolor=\"peachpuff\">";
 			echo "<td></td>";
-			echo "<td><strong>Positive Prediction</strong></td>";
-			echo "<td><strong>Negative Prediction</strong></td>";
+			foreach ($classes as $class) {
+				echo "<td><strong>Prediction $class</strong></td>";
+			}
 			echo "</tr>";
-			echo "<tr bgcolor=\"peachpuff\">";
-			echo "<td><strong>Positive Class</strong></td>";
-			echo "<td>".$tp."</td>";
-			echo "<td>".$fn."</td>";
-			echo "</tr>";
-			echo "<tr bgcolor=\"peachpuff\">";
-			echo "<td><strong>Negative Class</strong></td>";
-			echo "<td>".$fp."</td>";
-			echo "<td>".$tn."</td>";
-			echo "</tr>";
+			for ($i = 0; $i < count($classes); $i++) {
+				echo "<tr bgcolor=\"peachpuff\">";
+				for ($j = 0; $j < count($classes); $j++) {
+					if ($j == 0) {
+						$class = $classes[$i];
+						echo "<td><strong>Actual $class</strong></td>";
+					} 
+					if ($i == $j) {
+						$num_true += $con_matrix[$i][$j];
+						$class = $classes[$j];
+					}
+					else {
+						$fp += $con_matrix[$i][$j];
+						$fn += $con_matrix[$j][$i];
+					}
+					echo "<td>".$con_matrix[$i][$j]."</td>";
+				}
+				echo "</tr>";
+			}
 			echo "</table>";
 
-			// echo "Total Benar " .$num_true . "<br>";
-			// echo "TP " .$tp . "<br>";
-			// echo "TN " .$tn . "<br>";
-			// echo "<br>";
-			// echo "Total Salah " . $num_false . "<br>";
-			// echo "FP " .$fp . "<br>";
-			// echo "FN " .$fn . "<br>";
-
-			// update info di basis data
 			$accuracy = ($num_true/$count_y_gold)*100;
-			if (($tp + $fp) != 0) {
-				$precision = ($tp/($tp + $fp))*100;
+
+			if (($num_true + $fp) != 0) {
+				$precision = ($num_true/($num_true + $fp))*100;
 			}
 			else {
 				$precision = 0;	
 			}
-				
-			if (($tp + $fn) != 0) {
-				$recall = ($tp/($tp + $fn))*100;
+			
+			if (($num_true + $fn) != 0) {
+				$recall = ($num_true/($num_true + $fn))*100;
 			}
 			else {
 				$recall = 0;	
@@ -173,9 +165,11 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 				$f1_score = 0;
 			}
 			
-			$sql = "UPDATE gender_result SET `tester accuracy` = $accuracy, `tester precision` = $precision, `tester recall` = $recall, `tester f1-score` = $f1_score WHERE Uploadkey='$uploadKey'";
+			// update info di basis data
+			$table = $type . '_result';
+			$sql = "UPDATE $table SET `complete set accuracy` = $accuracy, `complete set precision` = $precision, `complete set recall` = $recall, `complete set f1-score` = $f1_score WHERE Uploadkey='$uploadKey'";
 
-			if ($conn->query($sql) === TRUE) {
+			if ($conn->query($sql) == TRUE) {
 				//echo "Record updated successfully";
 			} else {
 				die("Error updating record: " . $conn->error);
@@ -188,6 +182,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			echo "<br><br>*jika terjadi error terkait 'mysql', coba unggah sekali lagi.";
 			echo "<br><br><a href='index.php'>See Current Rankings</a><br>";
 				
+			
 			// ------------- keperluan save submission -------------------
 			// make file name in lower case -- untuk keperluan save hasil submission di folder
 			$new_file_name = strtolower($file);
@@ -200,10 +195,11 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			
 				// update table submission untuk simpan filename yang disubmit oleh grup
 				$sekarang = date("Y-m-d H:i:s");
-				$sql = "INSERT INTO gender_submission_logs(UploadKey, GroupName, filename, mime, size, updated, data, TesterAccuracy, TesterPrecision, TesterRecall, TesterF1Score) VALUES 
+				$table = $type . '_submission_logs';
+				$sql = "INSERT INTO $table(UploadKey, GroupName, filename, mime, size, updated, data, Accuracy, Precision_C, Recall, F1Score) VALUES 
 						('$uploadKey', '$namagrup', '$name', '$mime', '$size', '$sekarang','$string_input', '$accuracy', '$precision', '$recall', '$f1_score')";
 
-				if ($conn->query($sql) === TRUE) {
+				if ($conn->query($sql) == TRUE) {
 					// echo "Submission saved successfully";
 				} else {
 					die("Error submiting record: " . $conn->error);

@@ -3,7 +3,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 	if ( isset($_FILES["file"])) {
 		//if there was an error uploading the file
 		if ($_FILES["file"]["error"] > 0) {
-			echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
+			echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
 		} else {
 			// get uploadKey
 			$uploadKey = $_POST["uploadkey"];
@@ -65,9 +65,8 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			
 			fclose($fp);
 			
-			#echo "count y_pred " . count($y_pred) . "<br>";
 			//load gold standard data
-			$fp = fopen('temp_x2z/person_gold_standar_tester.csv', 'r');
+			$fp = fopen('temp_x2z/person_gold_standar.csv', 'r');
 			$y_gold = array();
 			$i = 0;
 			while ( ($line = fgetcsv($fp,1000,",")) !== false) {
@@ -75,8 +74,8 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 				$y_gold[$i] = $line[1];	
 				$i++;
 			}
-			fclose($fp);
-			
+			fclose($fp);	
+
 			//compute the metrices
 			$num_true = 0;
 			$tp = 0;
@@ -85,9 +84,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			$fn = 0;
 			$i = 0;
 			
-			while ( ($i < count($y_gold)) and ($i < count($y_pred))) {
-				
-				#echo "<br> asli ke - " .$i . "---" . $y_gold[$i]. "--" . $y_pred[$i] ." num true : " ;
+			while (($i < count($y_gold)) and ($i < count($y_pred))) {
 				if (($y_gold[$i] == $y_pred[$i]) and (($y_gold[$i]) !== '-')) {
 					// calculate TP 
 					if ($y_gold[$i] == 1) {
@@ -115,13 +112,10 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			
 			$counts = array_count_values($y_gold);
 			$counts_sum = array_sum($counts);
-			// $empty_gold = $counts['-'];
-			$empty_gold = 0;
+			$empty_gold = $counts['-'];
+			// $empty_gold = 0;
 			$count_y_gold = $counts_sum - $empty_gold;
 			$num_false = $count_y_gold - $num_true;
-			
-			// echo " Total Kosong ". $empty_gold;
-			// echo " Total Gold Standar " . $count_y_gold;
 	
 			echo "<br>";
 			echo "Confusion Matrix:<br>";
@@ -142,14 +136,6 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			echo "<td>".$tn."</td>";
 			echo "</tr>";
 			echo "</table>";
-
-			// echo "Total Benar " .$num_true . "<br>";
-			// echo "TP " .$tp . "<br>";
-			// echo "TN " .$tn . "<br>";
-			// echo "<br>";
-			// echo "Total Salah " . $num_false . "<br>";
-			// echo "FP " .$fp . "<br>";
-			// echo "FN " .$fn . "<br>";
 
 			// update info di basis data
 			$accuracy = ($num_true/$count_y_gold)*100;
@@ -174,7 +160,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 				$f1_score = 0;
 			}
 			
-			$sql = "UPDATE person_result SET `tester accuracy` = $accuracy, `tester precision` = $precision, `tester recall` = $recall, `tester f1-score` = $f1_score WHERE Uploadkey='$uploadKey'";
+			$sql = "UPDATE person_result SET `complete set accuracy` = $accuracy, `complete set precision` = $precision, `complete set recall` = $recall, `complete set f1-score` = $f1_score WHERE Uploadkey='$uploadKey'";
 
 			if ($conn->query($sql) === TRUE) {
 				//echo "Record updated successfully";
@@ -189,7 +175,6 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			echo "<br><br>*jika terjadi error terkait 'mysql', coba unggah sekali lagi.";
 			echo "<br><br><a href='index.php'>See Current Rankings</a><br>";
 				
-			
 			// ------------- keperluan save submission -------------------
 			// make file name in lower case -- untuk keperluan save hasil submission di folder
 			$new_file_name = strtolower($file);
@@ -202,7 +187,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			
 				// update table submission untuk simpan filename yang disubmit oleh grup
 				$sekarang = date("Y-m-d H:i:s");
-				$sql = "INSERT INTO person_submission_logs(UploadKey, GroupName, filename, mime, size, updated, data, TesterAccuracy, TesterPrecision, TesterRecall, TesterF1Score) VALUES 
+				$sql = "INSERT INTO person_submission_logs(UploadKey, GroupName, filename, mime, size, updated, data, Accuracy, Precision_C, Recall, F1Score) VALUES 
 						('$uploadKey', '$namagrup', '$name', '$mime', '$size', '$sekarang','$string_input', '$accuracy', '$precision', '$recall', '$f1_score')";
 
 				if ($conn->query($sql) === TRUE) {

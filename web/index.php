@@ -39,10 +39,6 @@ $result_ethnic_group = $conn->query($sql);
 	<tr>
 		<td><strong>Ranking</strong></td>
 		<td><strong>Group Name</strong></td>
-		<td><strong>Tester Accuracy (%)</strong></td>
-		<td><strong>Tester Precision (%)</strong></td>
-		<td><strong>Tester Recall (%)</strong></td>
-		<td><strong>Tester F1-Score (%)</strong></td>
 		<td><strong>Complete Set Accuracy (%)</strong></td>
 	    <td><strong>Complete Set Precision (%)</strong></td>
 	    <td><strong>Complete Set Recall (%)</strong></td>
@@ -55,10 +51,6 @@ $result_ethnic_group = $conn->query($sql);
 		echo "<tr bgcolor=\"pink\">";
 		echo "<td>".$i."</td>";
 		echo "<td>".$row["Groupname"]."</td>";
-		echo "<td>".($row["Tester Accuracy"])."</td>";
-		echo "<td>".($row["Tester Precision"])."</td>";
-		echo "<td>".($row["Tester Recall"])."</td>";
-		echo "<td>".($row["Tester F1-Score"])."</td>";
 		echo "<td>".($row["Complete Set Accuracy"])."</td>";
     	echo "<td>".($row["Complete Set Precision"])."</td>";
     	echo "<td>".($row["Complete Set Recall"])."</td>";

@@ -132,7 +132,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			}
 			echo "</table>";
 
-			$report = new ClassificationReport($y_gold_clean, $y_pred_clean, 1);
+			$report = new ClassificationReport($y_gold_clean, $y_pred_clean, 2);
 			$average = $report->getAverage();
 			$precision = $average['precision']*100;
 			$recall = $average['recall']*100;
@@ -164,7 +164,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			$string_input = implode('\n', $content);
 			
 			// jika berhasil di pindah ke folder uploads
-			if(move_uploaded_file($file_loc,$folder.$final_file))
+			if(move_uploaded_file($file_loc, $folder.$final_file))
 			{
 			
 				// update table submission untuk simpan filename yang disubmit oleh grup

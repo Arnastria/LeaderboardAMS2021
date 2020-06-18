@@ -32,7 +32,7 @@ $result_ethnic_group = $conn->query($sql);
 <center>
 <h2>Tugas Proyek Text Analytics Analitika Media Sosial</h2>
 <h3>Demographics Prediction on Twitter Data</h3>
-<p>Submission dibuka sampai Minggu, 28 Juni 2020, pukul 22.00</p>
+<p>Submission dibuka sampai Minggu, 28 Juni 2020, pukul 20.00</p>
 <hr>
 <h4>Person Prediction</h4>
 <table width="1000">

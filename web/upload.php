@@ -172,28 +172,36 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			}
 			
 			echo "<br><strong>Accuracy</strong>: " . $accuracy . "<br>";
-			echo "<strong>Precision for Each Class</strong>: " . $arr_precision . "<br>";
-			echo "<strong>Recall for Each Class</strong>: " . $arr_recall . "<br>";
-			echo "<strong>F1-score for Each Class</strong>: " . $arr_f1_score . "<br>";
-			echo "<strong>Support for Each Class</strong>: " . $arr_support . "<br>";
+			echo "<strong>Precision for Each Class</strong>:<br>";
+			print_r($arr_precision);
+			echo "<br>";
+			echo "<strong>Recall for Each Class</strong>:<br>";
+			print_r($arr_recall);
+			echo "<br>";
+			echo "<strong>F1-score for Each Class</strong>:<br>";
+			print_r($arr_f1_score);
+			echo "<br>";
+			echo "<strong>Support for Each Class</strong>:<br>";
+			print_r($arr_support);
+			echo "<br>";
 
 			//macro
-			echo "<strong>Macro-average</strong><br>";
-			echo "<strong>Precision</strong>: " . $precision_macro . "<br>";
-			echo "<strong>Recall</strong>: " . $recall_macro . "<br>";
-			echo "<strong>F1-score</strong>: " . $f1_score_macro . "<br>";
+			echo "<br><strong>Macro-average</strong><br>";
+			echo "    Precision: " . $precision_macro . "<br>";
+			echo "    Recall: " . $recall_macro . "<br>";
+			echo "    F1-score: " . $f1_score_macro . "<br>";
 
 			//micro
-			echo "<strong>Micro-average</strong><br>";
-			echo "<strong>Precision</strong>: " . $precision_micro . "<br>";
-			echo "<strong>Recall</strong>: " . $recall_micro . "<br>";
-			echo "<strong>F1-score</strong>: " . $f1_score_micro . "<br>";
+			echo "<br><strong>Micro-average</strong><br>";
+			echo "    Precision: " . $precision_micro . "<br>";
+			echo "    Recall: " . $recall_micro . "<br>";
+			echo "    F1-score: " . $f1_score_micro . "<br>";
 
 			//weighted
-			echo "<strong>Weighted-average</strong><br>";
-			echo "<strong>Precision</strong>: " . $precision_weighted . "<br>";
-			echo "<strong>Recall</strong>: " . $recall_weighted . "<br>";
-			echo "<strong>F1-score</strong>: " . $f1_score_weighted . "<br>";
+			echo "<br><strong>Weighted-average</strong><br>";
+			echo "    Precision: " . $precision_weighted . "<br>";
+			echo "    Recall: " . $recall_weighted . "<br>";
+			echo "    F1-score: " . $f1_score_weighted . "<br>";
 
 			echo "<br><br>*jika terjadi error terkait 'mysql', coba unggah sekali lagi.";
 			echo "<br><br><a href='index.php'>See Current Rankings</a><br>";

@@ -172,14 +172,15 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			}
 			
 			echo "<br><strong>Accuracy</strong>: " . $accuracy . "<br>";
-			echo "<strong>Precision for Each Class</strong>:<br>";
+			
+			echo "<br><strong>Precision for Each Class</strong>:<br>";
 			print_r($arr_precision);
 			echo "<br>";
 			echo "<strong>Recall for Each Class</strong>:<br>";
 			print_r($arr_recall);
 			echo "<br>";
 			echo "<strong>F1-score for Each Class</strong>:<br>";
-			print_r($arr_f1_score);
+			print_r($arr_f1score);
 			echo "<br>";
 			echo "<strong>Support for Each Class</strong>:<br>";
 			print_r($arr_support);
@@ -187,23 +188,23 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 
 			//macro
 			echo "<br><strong>Macro-average</strong><br>";
-			echo "    Precision: " . $precision_macro . "<br>";
-			echo "    Recall: " . $recall_macro . "<br>";
-			echo "    F1-score: " . $f1_score_macro . "<br>";
+			echo ">>>>Precision: " . $precision_macro . "<br>";
+			echo ">>>>Recall: " . $recall_macro . "<br>";
+			echo ">>>>F1-score: " . $f1_score_macro . "<br>";
 
 			//micro
 			echo "<br><strong>Micro-average</strong><br>";
-			echo "    Precision: " . $precision_micro . "<br>";
-			echo "    Recall: " . $recall_micro . "<br>";
-			echo "    F1-score: " . $f1_score_micro . "<br>";
+			echo ">>>>Precision: " . $precision_micro . "<br>";
+			echo ">>>>Recall: " . $recall_micro . "<br>";
+			echo ">>>>F1-score: " . $f1_score_micro . "<br>";
 
 			//weighted
 			echo "<br><strong>Weighted-average</strong><br>";
-			echo "    Precision: " . $precision_weighted . "<br>";
-			echo "    Recall: " . $recall_weighted . "<br>";
-			echo "    F1-score: " . $f1_score_weighted . "<br>";
+			echo ">>>>Precision: " . $precision_weighted . "<br>";
+			echo ">>>>Recall: " . $recall_weighted . "<br>";
+			echo ">>>>F1-score: " . $f1_score_weighted . "<br>";
 
-			echo "<br><br>*jika terjadi error terkait 'mysql', coba unggah sekali lagi.";
+			echo "<br>*jika terjadi error terkait 'mysql', coba unggah sekali lagi.";
 			echo "<br><br><a href='index.php'>See Current Rankings</a><br>";
 				
 			// ------------- keperluan save submission -------------------

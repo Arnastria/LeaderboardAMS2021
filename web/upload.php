@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/vendor/autoload.php';
 use Phpml\Metric\ClassificationReport;
 use Phpml\Metric\Accuracy;
@@ -132,31 +133,70 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			}
 			echo "</table>";
 
-			$report = new ClassificationReport($y_gold_clean, $y_pred_clean, 2);
-			$average = $report->getAverage();
-			$precision = $average['precision']*100;
-			$recall = $average['recall']*100;
-			$f1_score = $average['f1score']*100;
+			$arr_precision = $report->getPrecision();
+			$arr_recall = $report->getRecall();
+			$arr_f1score = $report->getF1Score();
+			$arr_support = $report->getSupport();
 			$accuracy = Accuracy::score($y_gold_clean, $y_pred_clean)*100;
+
+			// macro
+			$report_macro = new ClassificationReport($y_gold_clean, $y_pred_clean, 2);
+			$average_macro = $report_macro->getAverage();
+			$precision_macro = $average_macro['precision']*100;
+			$recall_macro = $average_macro['recall']*100;
+			$f1_score_macro = $average_macro['f1score']*100;
+
+			// micro
+			$report_micro = new ClassificationReport($y_gold_clean, $y_pred_clean, 1);
+			$average_micro = $report_micro->getAverage();
+			$precision_micro = $average_micro['precision']*100;
+			$recall_micro = $average_micro['recall']*100;
+			$f1_score_micro = $average_micro['f1score']*100;
+
+			// weighted
+			$report_weighted = new ClassificationReport($y_gold_clean, $y_pred_clean, 3);
+			$average_weighted = $report_weighted->getAverage();
+			$precision_weighted = $average_weighted['precision']*100;
+			$recall_weighted = $average_weighted['recall']*100;
+			$f1_score_weighted = $average_weighted['f1score']*100;
 			
 			// update info di basis data
 			$table = $type . '_result';
-			$sql = "UPDATE $table SET `complete set accuracy` = $accuracy, `complete set precision` = $precision, `complete set recall` = $recall, `complete set f1-score` = $f1_score WHERE Uploadkey='$uploadKey'";
+			$sql = "UPDATE $table SET `complete set accuracy` = $accuracy, `complete set precision` = $precision_macro, `complete set recall` = $recall_macro, `complete set f1-score` = $f1_score_macro WHERE Uploadkey='$uploadKey'";
 
 			if ($conn->query($sql) == TRUE) {
 				//echo "Record updated successfully";
 			} else {
 				die("Error updating record: " . $conn->error);
 			}
-	
+			
 			echo "<br><strong>Accuracy</strong>: " . $accuracy . "<br>";
-			echo "<strong>Precision</strong>: " . $precision . "<br>";
-			echo "<strong>Recall</strong>: " . $recall . "<br>";
-			echo "<strong>F1-score</strong>: " . $f1_score;
+			echo "<strong>Precision for Each Class</strong>: " . $arr_precision . "<br>";
+			echo "<strong>Recall for Each Class</strong>: " . $arr_recall . "<br>";
+			echo "<strong>F1-score for Each Class</strong>: " . $arr_f1_score . "<br>";
+			echo "<strong>Support for Each Class</strong>: " . $arr_support . "<br>";
+
+			//macro
+			echo "<strong>Macro-average</strong><br>";
+			echo "<strong>Precision</strong>: " . $precision_macro . "<br>";
+			echo "<strong>Recall</strong>: " . $recall_macro . "<br>";
+			echo "<strong>F1-score</strong>: " . $f1_score_macro . "<br>";
+
+			//micro
+			echo "<strong>Micro-average</strong><br>";
+			echo "<strong>Precision</strong>: " . $precision_micro . "<br>";
+			echo "<strong>Recall</strong>: " . $recall_micro . "<br>";
+			echo "<strong>F1-score</strong>: " . $f1_score_micro . "<br>";
+
+			//weighted
+			echo "<strong>Weighted-average</strong><br>";
+			echo "<strong>Precision</strong>: " . $precision_weighted . "<br>";
+			echo "<strong>Recall</strong>: " . $recall_weighted . "<br>";
+			echo "<strong>F1-score</strong>: " . $f1_score_weighted . "<br>";
+
 			echo "<br><br>*jika terjadi error terkait 'mysql', coba unggah sekali lagi.";
 			echo "<br><br><a href='index.php'>See Current Rankings</a><br>";
 				
-			
 			// ------------- keperluan save submission -------------------
 			// make file name in lower case -- untuk keperluan save hasil submission di folder
 			$new_file_name = strtolower($file);

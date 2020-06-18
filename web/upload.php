@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/vendor/autoload.php';
+use Phpml\Metric\ClassificationReport;
+use Phpml\Metric\Accuracy;
+
 if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 	if ( isset($_FILES["file"])) {
 		//if there was an error uploading the file
@@ -95,9 +99,13 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 
 			// modified
 			$i = 0;
+			$y_gold_clean = array();
+			$y_pred_clean = array();
 			while (($i < count($y_gold)) and ($i < count($y_pred))) {
 				if (($y_gold[$i]) != '-') {
 					 $con_matrix[array_search($y_gold[$i], $classes)][array_search($y_pred[$i], $classes)] += 1;
+					 array_push($y_gold_clean, $y_gold[$i]);
+					 array_push($y_pred_clean, $y_pred[$i]);
 				}
 				$i++;
 			}

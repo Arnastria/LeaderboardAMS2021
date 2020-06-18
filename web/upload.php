@@ -151,29 +151,34 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			echo "</table>";
 
 			$report = new ClassificationReport($y_gold_clean, $y_pred_clean, 1);
+			$average = $report->getAverage();
+			$precision = $average['precision'];
+			$recall = $average['recall'];
+			$f1_score = $average['f1score'];
+			$accuracy = Accuracy::score($y_gold_clean, $y_pred_clean);
 
-			$accuracy = ($num_true/$count_y_gold)*100;
+			// $accuracy = ($num_true/$count_y_gold)*100;
 
-			if (($num_true + $fp) != 0) {
-				$precision = ($num_true/($num_true + $fp))*100;
-			}
-			else {
-				$precision = 0;	
-			}
+			// if (($num_true + $fp) != 0) {
+			// 	$precision = ($num_true/($num_true + $fp))*100;
+			// }
+			// else {
+			// 	$precision = 0;	
+			// }
 			
-			if (($num_true + $fn) != 0) {
-				$recall = ($num_true/($num_true + $fn))*100;
-			}
-			else {
-				$recall = 0;	
-			}
+			// if (($num_true + $fn) != 0) {
+			// 	$recall = ($num_true/($num_true + $fn))*100;
+			// }
+			// else {
+			// 	$recall = 0;	
+			// }
 
-			if (($recall != 0) and ($precision != 0)) {
-				$f1_score = 2/((1/$recall) + (1/$precision));
-			}
-			else {
-				$f1_score = 0;
-			}
+			// if (($recall != 0) and ($precision != 0)) {
+			// 	$f1_score = 2/((1/$recall) + (1/$precision));
+			// }
+			// else {
+			// 	$f1_score = 0;
+			// }
 			
 			// update info di basis data
 			$table = $type . '_result';

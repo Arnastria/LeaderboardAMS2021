@@ -150,6 +150,8 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			}
 			echo "</table>";
 
+			$report = new ClassificationReport($y_gold_clean, $y_pred_clean, 1);
+
 			$accuracy = ($num_true/$count_y_gold)*100;
 
 			if (($num_true + $fp) != 0) {

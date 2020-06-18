@@ -133,10 +133,6 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			}
 			echo "</table>";
 
-			$arr_precision = $report->getPrecision();
-			$arr_recall = $report->getRecall();
-			$arr_f1score = $report->getF1Score();
-			$arr_support = $report->getSupport();
 			$accuracy = Accuracy::score($y_gold_clean, $y_pred_clean)*100;
 
 			// macro
@@ -145,6 +141,11 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			$precision_macro = $average_macro['precision']*100;
 			$recall_macro = $average_macro['recall']*100;
 			$f1_score_macro = $average_macro['f1score']*100;
+
+			$arr_precision = $report_macro->getPrecision();
+			$arr_recall = $report_macro->getRecall();
+			$arr_f1score = $report_macro->getF1Score();
+			$arr_support = $report_macro->getSupport();
 
 			// micro
 			$report_micro = new ClassificationReport($y_gold_clean, $y_pred_clean, 1);

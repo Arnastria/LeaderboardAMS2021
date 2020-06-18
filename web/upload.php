@@ -110,16 +110,6 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 				$i++;
 			}
 			
-			$counts = array_count_values($y_gold);
-			$counts_sum = array_sum($counts);
-			$empty_gold = $counts['-'];
-			// $empty_gold = 0;
-			// jumlah y_gold yang tidak null
-			$count_y_gold = $counts_sum - $empty_gold;
-
-			$num_true = 0;
-			$fp = 0;
-			$fn = 0;
 			echo "<br>";
 			echo "Confusion Matrix:<br>";
 			echo "<table width=\"1000\">";
@@ -135,14 +125,6 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 					if ($j == 0) {
 						$class = $classes[$i];
 						echo "<td><strong>Actual $class</strong></td>";
-					} 
-					if ($i == $j) {
-						$num_true += $con_matrix[$i][$j];
-						$class = $classes[$j];
-					}
-					else {
-						$fp += $con_matrix[$i][$j];
-						$fn += $con_matrix[$j][$i];
 					}
 					echo "<td>".$con_matrix[$i][$j]."</td>";
 				}
@@ -156,29 +138,6 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			$recall = $average['recall'];
 			$f1_score = $average['f1score'];
 			$accuracy = Accuracy::score($y_gold_clean, $y_pred_clean);
-
-			// $accuracy = ($num_true/$count_y_gold)*100;
-
-			// if (($num_true + $fp) != 0) {
-			// 	$precision = ($num_true/($num_true + $fp))*100;
-			// }
-			// else {
-			// 	$precision = 0;	
-			// }
-			
-			// if (($num_true + $fn) != 0) {
-			// 	$recall = ($num_true/($num_true + $fn))*100;
-			// }
-			// else {
-			// 	$recall = 0;	
-			// }
-
-			// if (($recall != 0) and ($precision != 0)) {
-			// 	$f1_score = 2/((1/$recall) + (1/$precision));
-			// }
-			// else {
-			// 	$f1_score = 0;
-			// }
 			
 			// update info di basis data
 			$table = $type . '_result';

@@ -109,7 +109,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 				}
 				$i++;
 			}
-			
+
 			echo "<br>";
 			echo "Confusion Matrix:<br>";
 			echo "<table width=\"1000\">";
@@ -134,10 +134,10 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 
 			$report = new ClassificationReport($y_gold_clean, $y_pred_clean, 1);
 			$average = $report->getAverage();
-			$precision = $average['precision'];
-			$recall = $average['recall'];
-			$f1_score = $average['f1score'];
-			$accuracy = Accuracy::score($y_gold_clean, $y_pred_clean);
+			$precision = $average['precision']*100;
+			$recall = $average['recall']*100;
+			$f1_score = $average['f1score']*100;
+			$accuracy = Accuracy::score($y_gold_clean, $y_pred_clean)*100;
 			
 			// update info di basis data
 			$table = $type . '_result';

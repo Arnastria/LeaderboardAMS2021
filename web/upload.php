@@ -163,7 +163,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			
 			// update info di basis data
 			$table = $type . '_result';
-			$sql = "UPDATE $table SET `complete set accuracy` = $accuracy, `complete set precision` = $precision_macro, `complete set recall` = $recall_macro, `complete set f1-score` = $f1_score_macro WHERE Uploadkey='$uploadKey'";
+			$sql = "UPDATE $table SET `complete set accuracy` = $accuracy, `complete set precision` = $precision_weighted, `complete set recall` = $recall_weighted, `complete set f1-score` = $f1_score_weighted WHERE Uploadkey='$uploadKey'";
 
 			if ($conn->query($sql) == TRUE) {
 				//echo "Record updated successfully";

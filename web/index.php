@@ -13,19 +13,19 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "select * from person_result order by `complete set precision` desc, `complete set recall` desc, `complete set f1-score` desc, `complete set accuracy` desc";
+$sql = "select * from person_result order by `complete set f1-score` desc, `complete set accuracy` desc, `complete set precision` desc, `complete set recall` desc";
 $result_person = $conn->query($sql);
 
-$sql = "select * from gender_result order by `complete set precision` desc, `complete set recall` desc, `complete set f1-score` desc, `complete set accuracy` desc";
+$sql = "select * from gender_result order by `complete set f1-score` desc, `complete set accuracy` desc, `complete set precision` desc, `complete set recall` desc";
 $result_gender = $conn->query($sql);
 
-$sql = "select * from origin_9_result order by `complete set precision` desc, `complete set recall` desc, `complete set f1-score` desc, `complete set accuracy` desc";
+$sql = "select * from origin_9_result order by `complete set f1-score` desc, `complete set accuracy` desc, `complete set precision` desc, `complete set recall` desc";
 $result_origin_9 = $conn->query($sql);
 
-$sql = "select * from origin_2_result order by `complete set precision` desc, `complete set recall` desc, `complete set f1-score` desc, `complete set accuracy` desc";
+$sql = "select * from origin_2_result order by `complete set f1-score` desc, `complete set accuracy` desc, `complete set precision` desc, `complete set recall` desc";
 $result_origin_2 = $conn->query($sql);
 
-$sql = "select * from ethnic_group_result order by `complete set precision` desc, `complete set recall` desc, `complete set f1-score` desc, `complete set accuracy` desc";
+$sql = "select * from ethnic_group_result order by `complete set f1-score` desc, `complete set accuracy` desc, `complete set precision` desc, `complete set recall` desc";
 $result_ethnic_group = $conn->query($sql);
 ?>
 

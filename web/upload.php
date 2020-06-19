@@ -163,7 +163,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			
 			// update info di basis data
 			$table = $type . '_result';
-			$sql = "UPDATE $table SET `complete set accuracy` = $accuracy, `complete set precision` = $precision_weighted, `complete set recall` = $recall_weighted, `complete set f1-score` = $f1_score_weighted WHERE Uploadkey='$uploadKey'";
+			$sql = "UPDATE $table SET `complete set accuracy` = $accuracy, `complete set precision` = $precision_macro, `complete set recall` = $recall_macro, `complete set f1-score` = $f1_score_macro WHERE Uploadkey='$uploadKey'";
 
 			if ($conn->query($sql) == TRUE) {
 				//echo "Record updated successfully";
@@ -221,7 +221,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 				$sekarang = date("Y-m-d H:i:s");
 				$table = $type . '_submission_logs';
 				$sql = "INSERT INTO $table(UploadKey, GroupName, filename, mime, size, updated, data, Accuracy, Precision_C, Recall, F1Score) VALUES 
-						('$uploadKey', '$namagrup', '$name', '$mime', '$size', '$sekarang','$string_input', '$accuracy', '$precision', '$recall', '$f1_score')";
+						('$uploadKey', '$namagrup', '$name', '$mime', '$size', '$sekarang','$string_input', '$accuracy', '$precision_macro', '$recall_macro', '$f1_score_macro')";
 
 				if ($conn->query($sql) == TRUE) {
 					// echo "Submission saved successfully";

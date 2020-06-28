@@ -32,7 +32,7 @@ $result_ethnic_group = $conn->query($sql);
 <center>
 <h2>Tugas Proyek Text Analytics Analitika Media Sosial</h2>
 <h3>Demographics Prediction on Twitter Data</h3>
-<p>Submission dibuka sampai Minggu, 28 Juni 2020, pukul 20.00</p>
+<p>Submission dibuka sampai Minggu, 28 Juni 2020, pukul 20.00 WIB</p>
 <hr>
 <h4>Person Prediction</h4>
 <table width="1000">
@@ -68,15 +68,15 @@ Submit your test result here: <br>
 	<form action="upload_person.php" method="post" enctype="multipart/form-data">
 		<tr>
 			<td width="20%">Select file</td>
-			<td width="80%"><input type="file" name="file" id="file"></td>
+			<td width="80%"><input type="file" name="file" id="file" disabled></td>
 		</tr>
 		<tr>
 			<td width="20%">Upload key</td>
-			<td><input type="text" name="uploadkey" required></td>
+			<td><input type="text" name="uploadkey" disabled></td>
 		</tr>
 		<tr>
 			<td>Submit</td>
-			<td><input type="submit" name="submit"></td>
+			<td><input type="submit" name="submit" disabled></td>
 		</tr>
 	</form>
 </table>
@@ -115,15 +115,15 @@ Submit your test result here: <br>
 	<form action="upload.php?type=gender" method="post" enctype="multipart/form-data">
 		<tr>
 			<td width="20%">Select file</td>
-			<td width="80%"><input type="file" name="file" id="file"></td>
+			<td width="80%"><input type="file" name="file" id="file" disabled></td>
 		</tr>
 		<tr>
 			<td width="20%">Upload key</td>
-			<td><input type="text" name="uploadkey" required></td>
+			<td><input type="text" name="uploadkey" disabled></td>
 		</tr>
 		<tr>
 			<td>Submit</td>
-			<td><input type="submit" name="submit"></td>
+			<td><input type="submit" name="submit" disabled></td>
 		</tr>
 	</form>
 </table>
@@ -162,15 +162,15 @@ Submit your test result here: <br>
 	<form action="upload.php?type=origin_9" method="post" enctype="multipart/form-data">
 		<tr>
 			<td width="20%">Select file</td>
-			<td width="80%"><input type="file" name="file" id="file"></td>
+			<td width="80%"><input type="file" name="file" id="file" disabled></td>
 		</tr>
 		<tr>
 			<td width="20%">Upload key</td>
-			<td><input type="text" name="uploadkey" required></td>
+			<td><input type="text" name="uploadkey" disabled></td>
 		</tr>
 		<tr>
 			<td>Submit</td>
-			<td><input type="submit" name="submit"></td>
+			<td><input type="submit" name="submit" disabled></td>
 		</tr>
 	</form>
 </table>
@@ -209,15 +209,15 @@ Submit your test result here: <br>
 	<form action="upload.php?type=origin_2" method="post" enctype="multipart/form-data">
 		<tr>
 			<td width="20%">Select file</td>
-			<td width="80%"><input type="file" name="file" id="file"></td>
+			<td width="80%"><input type="file" name="file" id="file" disabled></td>
 		</tr>
 		<tr>
 			<td width="20%">Upload key</td>
-			<td><input type="text" name="uploadkey" required></td>
+			<td><input type="text" name="uploadkey" disabled></td>
 		</tr>
 		<tr>
 			<td>Submit</td>
-			<td><input type="submit" name="submit"></td>
+			<td><input type="submit" name="submit" disabled></td>
 		</tr>
 	</form>
 </table>
@@ -256,15 +256,15 @@ Submit your test result here: <br>
 	<form action="upload.php?type=ethnic_group" method="post" enctype="multipart/form-data">
 		<tr>
 			<td width="20%">Select file</td>
-			<td width="80%"><input type="file" name="file" id="file"></td>
+			<td width="80%"><input type="file" name="file" id="file" disabled></td>
 		</tr>
 		<tr>
 			<td width="20%">Upload key</td>
-			<td><input type="text" name="uploadkey" required></td>
+			<td><input type="text" name="uploadkey" disabled></td>
 		</tr>
 		<tr>
 			<td>Submit</td>
-			<td><input type="submit" name="submit"></td>
+			<td><input type="submit" name="submit" disabled></td>
 		</tr>
 	</form>
 </table>

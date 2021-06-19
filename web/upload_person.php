@@ -23,7 +23,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			}
 			
 			//get groupname for giving filename
-			$getdata = "SELECT GroupName from person_result where UploadKey = $uploadKey";
+			$getdata = "SELECT GroupName from isaperson_result where UploadKey = $uploadKey";
 			$result_get = $conn->query($getdata);
 			$namagrup = '';
 			if ($result_get) {
@@ -160,7 +160,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 				$f1_score = 0;
 			}
 			
-			$sql = "UPDATE person_result SET `complete set accuracy` = $accuracy, `complete set precision` = $precision, `complete set recall` = $recall, `complete set f1-score` = $f1_score WHERE Uploadkey='$uploadKey'";
+			$sql = "UPDATE isaperson_result SET `complete set accuracy` = $accuracy, `complete set precision` = $precision, `complete set recall` = $recall, `complete set f1-score` = $f1_score WHERE Uploadkey='$uploadKey'";
 
 			if ($conn->query($sql) === TRUE) {
 				//echo "Record updated successfully";
@@ -187,7 +187,7 @@ if ( isset($_POST["submit"]) and isset($_POST["uploadkey"])) {
 			
 				// update table submission untuk simpan filename yang disubmit oleh grup
 				$sekarang = date("Y-m-d H:i:s");
-				$sql = "INSERT INTO person_submission_logs(UploadKey, GroupName, filename, mime, size, updated, data, Accuracy, Precision_C, Recall, F1Score) VALUES 
+				$sql = "INSERT INTO isaperson_submission_logs(UploadKey, GroupName, filename, mime, size, updated, data, Accuracy, Precision_C, Recall, F1Score) VALUES 
 						('$uploadKey', '$namagrup', '$name', '$mime', '$size', '$sekarang','$string_input', '$accuracy', '$precision', '$recall', '$f1_score')";
 
 				if ($conn->query($sql) === TRUE) {
